@@ -27,12 +27,15 @@ int main()
     }
 
     auto topTuple(heap.top());
-    while(std::get<1>(topTuple)<num_of_seq && std::get<2>(topTuple)<sz)
+    while(!heap.empty())
     {
-        auto newTuple(std::make_tuple(seq_matrix[std::get<1>(topTuple)][std::get<2>(topTuple)+1],std::get<1>(topTuple),std::get<2>(topTuple)+1));
         out<<std::get<0>(topTuple)<<" ";
         heap.pop();
-        heap.push(newTuple);
+        if(std::get<2>(topTuple)+1 < sz)
+        {
+            auto newTuple(std::make_tuple(seq_matrix[std::get<1>(topTuple)][std::get<2>(topTuple)+1],std::get<1>(topTuple),std::get<2>(topTuple)+1));
+            heap.push(newTuple);
+        }
         topTuple=heap.top();
     }
     
